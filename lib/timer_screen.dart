@@ -38,17 +38,32 @@ class _TimerScreenState extends State<TimerScreen> {
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (remainingTime > 0) {
-        setState(() {
-          remainingTime--;
-        });
-      } else {
-        timer.cancel();
-        // тут можно автоголосование или поражение
-      }
-    });
-  }
+  _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    if (!mounted) {
+      timer.cancel();
+      return;
+    }
+
+    if (remainingTime > 1) {
+      setState(() {
+        remainingTime--;
+      });
+    } else {
+      // остаётся 1 секунда → показываем 0 и поражение
+      setState(() {
+        remainingTime = 0;
+      });
+      timer.cancel();
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const LoseScreen(),
+        ),
+      );
+    }
+  });
+}
 
   @override
   void dispose() {
@@ -125,7 +140,7 @@ class _TimerScreenState extends State<TimerScreen> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset("assets/back.gif", fit: BoxFit.cover),
+            child: Image.asset("assets/background_02.gif", fit: BoxFit.cover),
           ),
           Center(
             child: Column(
@@ -133,13 +148,28 @@ class _TimerScreenState extends State<TimerScreen> {
               children: [
                 Text(
                   "$remainingTime",
-                  style: const TextStyle(fontSize: 80, color: Colors.white, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 100, color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: _goToVoting,
-                  child: const Text("Голосование"),
-                ),
+                SizedBox(
+  width: 260,
+  height: 70,
+  child: ElevatedButton(
+    style: ElevatedButton.styleFrom(
+      // Увеличиваем кнопку, но НЕ трогаем textStyle
+      padding: EdgeInsets.zero,
+    ),
+    onPressed: _goToVoting,
+    child: const Text(
+      "Голосование",
+      style: TextStyle(
+        fontSize: 28,        // увеличиваем размер
+        fontWeight: FontWeight.bold,
+        // НЕ задаём шрифт! → GoogleFonts применит автоматически
+      ),
+    ),
+  ),
+),
               ],
             ),
           ),

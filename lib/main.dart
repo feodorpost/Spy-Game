@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/back.gif',
+              'assets/background_02.gif',
               fit: BoxFit.cover,
             ),
           ),

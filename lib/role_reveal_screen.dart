@@ -38,10 +38,24 @@ class _RoleRevealScreenState extends State<RoleRevealScreen>
 
   // Картинки для шторки
   final List<String> swipeImages = [
-    'assets/role_pics/image1.jpg',
-    'assets/role_pics/image2.jpg',
-    'assets/role_pics/image3.jpg',
-    'assets/role_pics/image4.jpg',
+    'assets/role_pics/viking.png',
+    'assets/role_pics/alla.png',
+    'assets/role_pics/blonde.png',
+    'assets/role_pics/bomber.png',
+    'assets/role_pics/harry.png',
+    'assets/role_pics/jack.png',
+    'assets/role_pics/lana.png',
+    'assets/role_pics/piggy.png',
+    'assets/role_pics/pirat.png',
+    'assets/role_pics/rock.png',
+    'assets/role_pics/ryan.png',
+    'assets/role_pics/scarlett.png',
+    'assets/role_pics/sherlok.png',
+    'assets/role_pics/swift.png',
+    'assets/role_pics/tatum.png',
+    'assets/role_pics/thatcher.png',
+    'assets/role_pics/tyler.png',
+    'assets/role_pics/zombie.png',
   ];
 
   // Выбранная картинка для шторки
@@ -144,25 +158,29 @@ class _RoleRevealScreenState extends State<RoleRevealScreen>
   }
 
   void _nextPlayer() {
-    if (currentPlayer < widget.playerCount - 1) {
-      setState(() {
-        currentPlayer++;
-        offsetY = 0;
-        isRoleVisible = false;
-      });
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => TimerScreen(
-            duration: widget.timerSeconds,
-            playerNames: widget.playerNames,
-            roles: roles,
-          ),
+  if (currentPlayer < widget.playerCount - 1) {
+    setState(() {
+      currentPlayer++;
+
+      // 👉 выбираем новую случайную картинку для следующего игрока
+      swipeImage = swipeImages[Random().nextInt(swipeImages.length)];
+
+      offsetY = 0;
+      isRoleVisible = false;
+    });
+  } else {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => TimerScreen(
+          duration: widget.timerSeconds,
+          playerNames: widget.playerNames,
+          roles: roles,
         ),
-      );
-    }
+      ),
+    );
   }
+}
 
   void _animateTo(double target) {
     _animation = Tween<double>(begin: offsetY, end: target).animate(
@@ -275,7 +293,7 @@ class _RoleRevealScreenState extends State<RoleRevealScreen>
                               const SizedBox(width: 48),
                             ],
                           ),
-                          const SizedBox(height: 370),
+                          const SizedBox(height: 430),
                           Icon(
                             Icons.keyboard_arrow_up,
                             size: 50,

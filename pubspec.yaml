@@ -55,6 +55,9 @@ flutter:
   uses-material-design: true
   assets:
     - assets/main_background.png
+    - assets/background_01.gif
+    - assets/background_02.gif
+    - assets/back.mov
     - assets/categ1.png
     - assets/categ2.png
     - assets/categ3.png
@@ -71,8 +74,6 @@ flutter:
     - assets/words_categ/celeb.txt
     - assets/words_categ/locations.txt
     - assets/role_pics/
-    - assets/role_pics/spy_role.png
-    - assets/role_pics/citizen_role.png
   fonts:
     - family: MyFont
       fonts:

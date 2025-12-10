@@ -70,7 +70,7 @@ class _VotingScreenState extends State<VotingScreen> {
                   // последний шпион → победа мирных
                   widget.onResult(false, player, _playerNames, _roles);
                 } else {
-                  // ещё остались шпионы → продолжаем
+                  // ещё остались шпионы → продолжаем игру
                   widget.onResult(false, player, _playerNames, _roles);
                 }
               } else {
@@ -90,38 +90,60 @@ class _VotingScreenState extends State<VotingScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          // Фон
           Positioned.fill(
             child: Image.asset(
-              "assets/back.gif",
+              "assets/background_02.gif",
               fit: BoxFit.cover,
             ),
           ),
           SafeArea(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(20),
-              itemCount: _playerNames.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: Colors.black.withOpacity(0.6),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    side: BorderSide(
-                      color: Colors.white.withOpacity(0.8),
-                      width: 2,
-                    ),
-                  ),
-                  child: ListTile(
-                    title: Text(
-                      _playerNames[index],
-                      style: const TextStyle(
-                        fontSize: 24,
+            child: Column(
+              children: [
+                // Стрелка "назад" сверху слева
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
                         color: Colors.white,
+                        size: 30,
                       ),
+                      onPressed: () => Navigator.pop(context),
                     ),
-                    onTap: () => _confirmVote(context, index),
+                  ],
+                ),
+
+                // Список игроков
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(20),
+                    itemCount: _playerNames.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        color: Colors.black.withOpacity(0.6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          side: BorderSide(
+                            color: Colors.white.withOpacity(0.8),
+                            width: 2,
+                          ),
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            _playerNames[index],
+                            style: const TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onTap: () => _confirmVote(context, index),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+              ],
             ),
           ),
         ],
