@@ -158,29 +158,29 @@ class _RoleRevealScreenState extends State<RoleRevealScreen>
   }
 
   void _nextPlayer() {
-  if (currentPlayer < widget.playerCount - 1) {
-    setState(() {
-      currentPlayer++;
+    if (currentPlayer < widget.playerCount - 1) {
+      setState(() {
+        currentPlayer++;
 
-      // 👉 выбираем новую случайную картинку для следующего игрока
-      swipeImage = swipeImages[Random().nextInt(swipeImages.length)];
+        // 👉 выбираем новую случайную картинку для следующего игрока
+        swipeImage = swipeImages[Random().nextInt(swipeImages.length)];
 
-      offsetY = 0;
-      isRoleVisible = false;
-    });
-  } else {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => TimerScreen(
-          duration: widget.timerSeconds,
-          playerNames: widget.playerNames,
-          roles: roles,
+        offsetY = 0;
+        isRoleVisible = false;
+      });
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => TimerScreen(
+            duration: widget.timerSeconds,
+            playerNames: widget.playerNames,
+            roles: roles,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
-}
 
   void _animateTo(double target) {
     _animation = Tween<double>(begin: offsetY, end: target).animate(
@@ -217,35 +217,35 @@ class _RoleRevealScreenState extends State<RoleRevealScreen>
 
           // БЛОК С РОЛЬЮ + ИКОНКОЙ
           Positioned(
-            top: MediaQuery.of(context).size.height / 2 + 100,
-            left: 0,
-            right: 0,
-            child: Opacity(
-              opacity: (offsetY / maxOffset).clamp(0.0, 1.0),
-              child: Center(
-                child: !_hasCurrentRole
-                    ? const SizedBox.shrink()
-                    : _RoleWithIcon(roleText: roles[currentPlayer]),
-              ),
-            ),
-          ),
+  bottom: 120, // регулируешь под себя
+  left: 0,
+  right: 0,
+  child: Opacity(
+    opacity: (offsetY / maxOffset).clamp(0.0, 1.0),
+    child: Center(
+      child: !_hasCurrentRole
+          ? const SizedBox.shrink()
+          : _RoleWithIcon(roleText: roles[currentPlayer]),
+    ),
+  ),
+),
 
           // ШТОРКА
           Transform.translate(
             offset: Offset(0, -offsetY),
             child: GestureDetector(
               onVerticalDragUpdate: (details) {
-  setState(() {
-    offsetY -= details.primaryDelta! / 2;
-    if (offsetY < 0) offsetY = 0;
-    if (offsetY > maxOffset) offsetY = maxOffset;
+                setState(() {
+                  offsetY -= details.primaryDelta! / 2;
+                  if (offsetY < 0) offsetY = 0;
+                  if (offsetY > maxOffset) offsetY = maxOffset;
 
-    // один раз «защёлкиваем» появление кнопки
-    if (!isRoleVisible && offsetY >= maxOffset * 0.33) {
-      isRoleVisible = true;
-    }
-  });
-},
+                  // один раз «защёлкиваем» появление кнопки
+                  if (!isRoleVisible && offsetY >= maxOffset * 0.33) {
+                    isRoleVisible = true;
+                  }
+                });
+              },
               onVerticalDragEnd: (details) {
                 _animateTo(0);
               },
@@ -265,52 +265,66 @@ class _RoleRevealScreenState extends State<RoleRevealScreen>
                       ),
                     ),
                     child: SafeArea(
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.arrow_back,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () => Navigator.pop(context),
-                              ),
-                              Text(
-                                (currentPlayer >= 0 &&
-                                        currentPlayer <
-                                            widget.playerNames.length)
-                                    ? widget.playerNames[currentPlayer]
-                                    : "",
-                                style: const TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(width: 48),
-                            ],
-                          ),
-                          const SizedBox(height: 430),
-                          Icon(
-                            Icons.keyboard_arrow_up,
-                            size: 50,
-                            color: Colors.white.withOpacity(0.8),
-                          ),
-                          const SizedBox(height: 20),
-                          const Text(
-                            "Свайпни вверх",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 35,
-                            ),
-                          ),
-                          const Spacer(),
-                        ],
-                      ),
-                    ),
+  child: Column(
+    children: [
+      const SizedBox(height: 10),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+
+          // если хочешь — можешь тут оставить свой увеличенный Text/Expanded
+          Expanded(
+            child: Text(
+              (currentPlayer >= 0 &&
+                      currentPlayer < widget.playerNames.length)
+                  ? widget.playerNames[currentPlayer]
+                  : "",
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 54,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+
+          const SizedBox(width: 48),
+        ],
+      ),
+
+      const SizedBox(height: 20),
+
+      // ➜ всё свободное место над стрелкой
+      const Spacer(),
+
+      Icon(
+        Icons.keyboard_arrow_up,
+        size: 60,
+        color: Colors.white.withOpacity(0.8),
+      ),
+      const SizedBox(height: 5),
+      const Text(
+        "Свайпни вверх",
+        style: TextStyle(
+          color: Colors.white70,
+          fontSize: 35,
+        ),
+      ),
+
+      // ➜ фиксированный отступ до нижнего края шторки (и до кнопки)
+      const SizedBox(height: 90),
+    ],
+  ),
+),
+
                   ),
 
                   // КНОПКА "СЛЕДУЮЩИЙ ИГРОК"
@@ -373,7 +387,7 @@ class _RoleWithIcon extends StatelessWidget {
             color: isSpy ? Colors.red : Colors.green,
             size: 45,
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 20),
           Text(
             roleText,
             style: const TextStyle(
