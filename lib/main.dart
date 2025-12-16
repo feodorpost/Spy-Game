@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
 import 'category_selection_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:window_manager/window_manager.dart';
+// import 'dart:io';
 
 void main() {
   runApp(const SpyGame());
 }
+
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+
+//   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+//     await windowManager.ensureInitialized();
+
+//     WindowOptions windowOptions = const WindowOptions(
+//       size: Size(400, 800), // iPhone 12/13/14
+//       minimumSize: Size(400, 800),
+//       center: true,
+//       title: 'Spy Game',
+//     );
+
+//     windowManager.waitUntilReadyToShow(windowOptions, () async {
+//       await windowManager.show();
+//       await windowManager.focus();
+//     });
+//   }
+
+//   runApp(const SpyGame());
+// }
 
 class SpyGame extends StatelessWidget {
   const SpyGame({super.key});
@@ -203,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
                   textStyle: GoogleFonts.delaGothicOne(
-                    fontSize: 25,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -224,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 30),
                     child: Text(
-                      'Далее | ${_controllers.length} игроков\n\n\n',
+                      'ИГРАТЬ | ${_controllers.length} игроков',
                       textAlign: TextAlign.center,
                     ),
                   ),

@@ -103,7 +103,7 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
     style: ElevatedButton.styleFrom(
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 40), // обнуляем вертикальные паддинги
       textStyle: GoogleFonts.delaGothicOne(
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
     ),
@@ -124,9 +124,9 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
     child: Align(
       alignment: Alignment.topCenter, // прижимаем текст к верху кнопки
       child: Padding(
-        padding: const EdgeInsets.only(top: 30), // небольшой отступ сверху
+        padding: const EdgeInsets.only(top: 12), // небольшой отступ сверху
         child: Text(
-          "Играть | ${widget.selectedCategories.length} категорий\n\n\n",
+          "ИГРАТЬ \n ${widget.selectedCategories.length} категория(-ей)\n\n\n",
           textAlign: TextAlign.center,
         ),
       ),

@@ -22,11 +22,21 @@ class LoseScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.popUntil(context, (route) => route.isFirst);
-                },
-                child: const Text("Главное меню"),
+              SizedBox(
+                width: 300, // ширина кнопки
+                height: 70,  // высота кнопки
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  },
+                  child: const Text(
+                    "Главное меню",
+                    style: TextStyle(
+                      fontSize: 26, // размер текста
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

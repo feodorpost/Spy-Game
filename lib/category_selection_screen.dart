@@ -159,7 +159,7 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
                   textStyle: GoogleFonts.delaGothicOne(
-                    fontSize: 25,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -184,9 +184,9 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 30),
+                    padding: const EdgeInsets.only(top: 12),
                     child: Text(
-                      'Далее | ${selectedIndexes.length} категория(ей)\n\n\n',
+                      'ИГРАТЬ \n${selectedIndexes.length} категория(-ей)\n\n\n',
                       textAlign: TextAlign.center,
                     ),
                   ),

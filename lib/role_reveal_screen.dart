@@ -49,7 +49,6 @@ class _RoleRevealScreenState extends State<RoleRevealScreen>
     'assets/role_pics/pirat.png',
     'assets/role_pics/rock.png',
     'assets/role_pics/ryan.png',
-    'assets/role_pics/scarlett.png',
     'assets/role_pics/sherlok.png',
     'assets/role_pics/swift.png',
     'assets/role_pics/tatum.png',
@@ -375,28 +374,39 @@ class _RoleWithIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isSpy = roleText == "Ты - Шпион";
 
-    return Container(
-      padding: const EdgeInsets.all(10),
-      color: Colors.black, // чёрный фон под текстом
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.person,
-            color: isSpy ? Colors.red : Colors.green,
-            size: 45,
-          ),
-          const SizedBox(width: 20),
-          Text(
-            roleText,
-            style: const TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width * 0.9, // ограничили ширину
+      ),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        color: Colors.black,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.person,
+              color: isSpy ? Colors.red : Colors.green,
+              size: 42,
             ),
-          ),
-        ],
+            const SizedBox(width: 20), // расстояние теперь всегда одинаковое
+
+            Flexible(
+              fit: FlexFit.loose,
+              child: Text(
+                roleText,
+                softWrap: true,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 29,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

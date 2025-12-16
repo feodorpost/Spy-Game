@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 class VotingScreen extends StatefulWidget {
   final List<String> playerNames;
-  final List<String> roles; // роли игроков
+  final List<String> roles;
+
+  final VoidCallback onResetTimer; // ✅ сброс таймера при подтверждении кика
+
   final void Function(
     bool spiesWin,
     String? eliminatedPlayer,
@@ -15,6 +18,7 @@ class VotingScreen extends StatefulWidget {
     required this.playerNames,
     required this.roles,
     required this.onResult,
+    required this.onResetTimer,
   });
 
   @override
@@ -30,16 +34,11 @@ class _VotingScreenState extends State<VotingScreen> {
     super.initState();
     _playerNames = List.from(widget.playerNames);
     _roles = List.from(widget.roles);
-
-    // Отладка: печатаем роли игроков
-    for (int i = 0; i < _playerNames.length; i++) {
-      debugPrint("Игрок: ${_playerNames[i]}, Роль: ${_roles[i]}");
-    }
   }
 
   void _confirmVote(BuildContext context, int index) {
-    String player = _playerNames[index];
-    String role = _roles[index];
+    final player = _playerNames[index];
+    final role = _roles[index];
 
     showDialog(
       context: context,
@@ -55,26 +54,23 @@ class _VotingScreenState extends State<VotingScreen> {
             onPressed: () {
               Navigator.pop(context); // закрыть диалог
 
-              bool wasSpy = role.contains("Шпион");
+              // ✅ СБРОС ТАЙМЕРА по подтверждению кика
+              widget.onResetTimer();
 
-              // Удаляем игрока и роль
+              final wasSpy = role.contains("Шпион");
+
               setState(() {
                 _playerNames.removeAt(index);
                 _roles.removeAt(index);
               });
 
-              int spiesLeft = _roles.where((r) => r.contains("Шпион")).length;
+              final spiesLeft = _roles.where((r) => r.contains("Шпион")).length;
 
               if (wasSpy) {
-                if (spiesLeft == 0) {
-                  // последний шпион → победа мирных
-                  widget.onResult(false, player, _playerNames, _roles);
-                } else {
-                  // ещё остались шпионы → продолжаем игру
-                  widget.onResult(false, player, _playerNames, _roles);
-                }
+                // убрали шпиона
+                widget.onResult(false, player, _playerNames, _roles);
               } else {
-                // исключили мирного → победа шпионов
+                // убрали мирного → победа шпионов
                 widget.onResult(true, player, _playerNames, _roles);
               }
             },
@@ -90,7 +86,6 @@ class _VotingScreenState extends State<VotingScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Фон
           Positioned.fill(
             child: Image.asset(
               "assets/background_02.gif",
@@ -100,7 +95,6 @@ class _VotingScreenState extends State<VotingScreen> {
           SafeArea(
             child: Column(
               children: [
-                // Стрелка "назад" сверху слева
                 Row(
                   children: [
                     IconButton(
@@ -113,8 +107,6 @@ class _VotingScreenState extends State<VotingScreen> {
                     ),
                   ],
                 ),
-
-                // Список игроков
                 Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.all(20),
@@ -123,21 +115,28 @@ class _VotingScreenState extends State<VotingScreen> {
                       return Card(
                         color: Colors.black.withOpacity(0.6),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(20),
                           side: BorderSide(
                             color: Colors.white.withOpacity(0.8),
                             width: 2,
                           ),
                         ),
-                        child: ListTile(
-                          title: Text(
-                            _playerNames[index],
-                            style: const TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(20),
+                          onTap: () => _confirmVote(context, index),
+                          child: Container(
+                            height: 90,
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              _playerNames[index],
+                              style: const TextStyle(
+                                fontSize: 26,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                          onTap: () => _confirmVote(context, index),
                         ),
                       );
                     },
