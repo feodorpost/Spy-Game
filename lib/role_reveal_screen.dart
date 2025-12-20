@@ -311,7 +311,7 @@ class _RoleRevealScreenState extends State<RoleRevealScreen>
       ),
       const SizedBox(height: 5),
       const Text(
-        "Свайпни вверх",
+        "Потяни вверх",
         style: TextStyle(
           color: Colors.white70,
           fontSize: 35,
