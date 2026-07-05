@@ -4,7 +4,7 @@
 
 🎮 **[Играть в браузере →](https://feodorpost.github.io/Spy-Game/)**
 
-![Preview](<img width="889" height="1364" alt="Group 21" src="https://github.com/user-attachments/assets/ed758671-de4c-433e-8b03-f6b73c752a0f" />)
+<img width="889" height="1364" alt="Group 21" src="https://github.com/user-attachments/assets/ed758671-de4c-433e-8b03-f6b73c752a0f" />
 
 ---
 
@@ -16,10 +16,6 @@
 - 🗳️ Голосование с исключением игроков
 - 🎬 Несколько категорий слов: кинематограф, знаменитости, локации, страны
 - 🌐 Работает как веб-приложение, так и нативно на Android / Windows
-
----
-
-## 📸 Скриншоты
 
 ---
 
