@@ -1,16 +1,61 @@
-# spy_game
+# 🕵️ Spy Game
 
-A new Flutter project.
+Мобильная party-игра «Шпион» для компании друзей. Один из игроков не знает загаданное слово и должен вычислить его по ответам остальных, оставаясь незамеченным.
 
-## Getting Started
+🎮 **[Играть в браузере →](https://feodorpost.github.io/Spy-Game/)**
 
-This project is a starting point for a Flutter application.
+![image](<img width="889" height="1364" alt="Group 21" src="https://github.com/user-attachments/assets/ed758671-de4c-433e-8b03-f6b73c752a0f" />
+)
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## ✨ Возможности
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- 👥 От 3 до 20+ игроков
+- 🎭 Настраиваемое количество шпионов (авто-лимит в зависимости от числа игроков)
+- ⏱️ Настраиваемый таймер обсуждения
+- 🗳️ Голосование с исключением игроков
+- 🎬 Несколько категорий слов: кинематограф, знаменитости, локации, страны
+- 🌐 Работает как веб-приложение, так и нативно на Android / Windows
+
+---
+
+## 📸 Скриншоты
+
+---
+
+## 🚀 Установка
+
+### Android
+
+Скачай последний `.apk` из раздела [**Releases**](../../releases/latest) и установи на телефон (потребуется разрешить установку из неизвестных источников).
+
+### Windows
+
+Скачай и распакуй последний `.zip` из [**Releases**](../../releases/latest), запусти `spy_game.exe`.
+
+### Веб-версия
+
+Никакой установки не нужно — просто открой [сайт игры](https://feodorpost.github.io/Spy-Game/) в браузере.
+
+---
+
+## 🛠️ Технологии
+
+- [Flutter](https://flutter.dev) — кроссплатформенный UI-фреймворк
+- Dart
+
+## 🧑‍💻 Запуск проекта локально
+
+```bash
+git clone https://github.com/feodorpost/Spy-Game.git
+cd Spy-Game
+flutter pub get
+flutter run
+```
+
+---
+
+## 📄 Лицензия
+
+Укажи здесь лицензию проекта (например, MIT) или удали этот раздел, если пока не определился.
