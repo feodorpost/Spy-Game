@@ -4,8 +4,7 @@
 
 🎮 **[Играть в браузере →](https://feodorpost.github.io/Spy-Game/)**
 
-![image](<img width="889" height="1364" alt="Group 21" src="https://github.com/user-attachments/assets/ed758671-de4c-433e-8b03-f6b73c752a0f" />
-)
+![Preview](<img width="889" height="1364" alt="Group 21" src="https://github.com/user-attachments/assets/ed758671-de4c-433e-8b03-f6b73c752a0f" />)
 
 ---
 
@@ -53,9 +52,3 @@ cd Spy-Game
 flutter pub get
 flutter run
 ```
-
----
-
-## 📄 Лицензия
-
-Укажи здесь лицензию проекта (например, MIT) или удали этот раздел, если пока не определился.
