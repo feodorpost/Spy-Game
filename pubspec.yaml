@@ -55,20 +55,21 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/main_background.png
-    - assets/background_01.gif
-    - assets/background_02.gif
-    - assets/back.mov
+    # - assets/main_background.png
+    # - assets/background_01.gif
+    # - assets/background_02.gif
+    # - assets/back.mov
+    - assets/background.webp
     - assets/categ1.png
     - assets/categ2.png
     - assets/categ3.png
     - assets/categ4.png
     - assets/categ5.png
-    - assets/back.jpg
-    - assets/back.gif
-    - assets/back1.png
-    - assets/back_light.jpg
-    - assets/back_dark.jpg
+    # - assets/back.jpg
+    # - assets/back.gif
+    # - assets/back1.png
+    # - assets/back_light.jpg
+    # - assets/back_dark.jpg
     - assets/words_categ/all_in.txt
     - assets/words_categ/countries.txt
     - assets/words_categ/movies.txt

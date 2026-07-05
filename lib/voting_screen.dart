@@ -4,7 +4,8 @@ class VotingScreen extends StatefulWidget {
   final List<String> playerNames;
   final List<String> roles;
 
-  final VoidCallback onResetTimer; // ✅ сброс таймера при подтверждении кика
+  final VoidCallback onResetTimer; // сброс таймера при подтверждении кика
+  final VoidCallback onBack; // возврат к экрану таймера по кнопке "назад"
 
   final void Function(
     bool spiesWin,
@@ -19,6 +20,7 @@ class VotingScreen extends StatefulWidget {
     required this.roles,
     required this.onResult,
     required this.onResetTimer,
+    required this.onBack,
   });
 
   @override
@@ -52,10 +54,10 @@ class _VotingScreenState extends State<VotingScreen> {
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context); // закрыть диалог
+              Navigator.pop(context); // закрыть диалог (это отдельный route поверх текущего экрана — тут pop нужен и корректен)
 
-              // ✅ СБРОС ТАЙМЕРА по подтверждению кика
-              widget.onResetTimer();
+              // СБРОС ТАЙМЕРА по подтверждению кика
+              // widget.onResetTimer();
 
               final wasSpy = role.contains("Шпион");
 
@@ -103,7 +105,13 @@ class _VotingScreenState extends State<VotingScreen> {
                         color: Colors.white,
                         size: 30,
                       ),
-                      onPressed: () => Navigator.pop(context),
+                      // Раньше тут был Navigator.pop(context). Но VotingScreen
+                      // больше не отдельный route — это просто виджет внутри
+                      // TimerScreen. pop() вытолкнул бы весь TimerScreen со
+                      // стека (на GameSettingsScreen). Вместо этого — колбэк,
+                      // который просто переключает TimerScreen обратно на
+                      // экран с таймером.
+                      onPressed: widget.onBack,
                     ),
                   ],
                 ),

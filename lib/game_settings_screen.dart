@@ -83,6 +83,21 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
                           if (timerSeconds > 30) setState(() => timerSeconds -= 30);
                         },
                       ),
+                      const SizedBox(height: 8),
+                      // ✅ Подсказка: сколько шпионов доступно на текущее
+                      // количество игроков, чтобы ограничение не выглядело
+                      // как баг, когда кнопка "+" перестаёт работать.
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Text(
+                          'Максимум $maxSpies шпион(ов) на ${widget.playerCount} игроков',
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.white70,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
                       const SizedBox(height: 100),
                     ],
                   ),
@@ -97,42 +112,42 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
             right: 20,
             bottom: -100,
             child: SizedBox(
-  width: double.infinity,
-  height: 200,
-  child: ElevatedButton(
-    style: ElevatedButton.styleFrom(
-      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 40), // обнуляем вертикальные паддинги
-      textStyle: GoogleFonts.delaGothicOne(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => RoleRevealScreen(
-            playerCount: widget.playerCount,
-            spies: spies,
-            playerNames: widget.playerNames,
-            timerSeconds: timerSeconds,
-            selectedCategories: widget.selectedCategories,
-          ),
-        ),
-      );
-    },
-    child: Align(
-      alignment: Alignment.topCenter, // прижимаем текст к верху кнопки
-      child: Padding(
-        padding: const EdgeInsets.only(top: 12), // небольшой отступ сверху
-        child: Text(
-          "ИГРАТЬ \n ${widget.selectedCategories.length} категория(-ей)\n\n\n",
-          textAlign: TextAlign.center,
-        ),
-      ),
-    ),
-  ),
-),
+              width: double.infinity,
+              height: 200,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
+                  textStyle: GoogleFonts.delaGothicOne(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RoleRevealScreen(
+                        playerCount: widget.playerCount,
+                        spies: spies,
+                        playerNames: widget.playerNames,
+                        timerSeconds: timerSeconds,
+                        selectedCategories: widget.selectedCategories,
+                      ),
+                    ),
+                  );
+                },
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Text(
+                      "ИГРАТЬ \n ${widget.selectedCategories.length} категория(-ей)\n\n\n",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
