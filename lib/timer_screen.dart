@@ -163,7 +163,7 @@ class _TimerScreenState extends State<TimerScreen> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset("assets/background_02.gif", fit: BoxFit.cover),
+            child: Image.asset("assets/background.webp", fit: BoxFit.cover),
           ),
           Center(
             child: Column(

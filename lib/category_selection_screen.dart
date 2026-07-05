@@ -37,7 +37,7 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/background_02.gif',
+              'assets/background.webp',
               fit: BoxFit.cover,
             ),
           ),

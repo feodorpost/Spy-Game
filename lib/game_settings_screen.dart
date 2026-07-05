@@ -32,7 +32,7 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
           // фон
           Positioned.fill(
             child: Image.asset(
-              'assets/background_02.gif',
+              'assets/background.webp',
               fit: BoxFit.cover,
             ),
           ),

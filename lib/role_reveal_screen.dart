@@ -202,12 +202,12 @@ class _RoleRevealScreenState extends State<RoleRevealScreen>
       body: Stack(
         children: [
           // Фон-гифка (будет перекрыта черным, но пусть живет)
-          Positioned.fill(
-            child: Image.asset(
-              'assets/back.gif',
-              fit: BoxFit.cover,
-            ),
-          ),
+          // Positioned.fill(
+          //   child: Image.asset(
+          //     'assets/back.gif',
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
 
           // ЧЕРНЫЙ ФОН НА ВЕСЬ ЭКРАН
           Positioned.fill(
